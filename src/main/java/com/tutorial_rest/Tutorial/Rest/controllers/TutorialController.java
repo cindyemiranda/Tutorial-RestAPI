@@ -27,4 +27,17 @@ public class TutorialController {
 		LocalDateTime now = LocalDateTime.now();  
 		return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(dtf.format(now)));	
 	}
+	
+    @GetMapping("/system-property")
+    public ResponseEntity<ResponseMessage> getSystemProperty() {
+        String propertyValue = System.getProperty(Constantes.PROPIEDAD_SISTEMA_OPERATIVO_2);
+        String mensajePropiedad = "";
+        if (propertyValue == null || propertyValue.isEmpty()) {
+        	mensajePropiedad = "La propiedad " + propertyValue + " no existe";
+        } else {
+        	mensajePropiedad = propertyValue;
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(mensajePropiedad));
+    }	
+	
 }
