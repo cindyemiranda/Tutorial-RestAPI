@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tutorial_rest.Tutorial.Rest.messages.ResponseMessage;
 import com.tutorial_rest.Tutorial.Rest.utils.Constantes;
 
-
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;  
 
 @RestController
 public class TutorialController {
@@ -18,5 +19,12 @@ public class TutorialController {
 		System.out.println(mensaje);
 		return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(mensaje));
 		
+	}
+
+	@GetMapping("/get-datetime")
+	public ResponseEntity<ResponseMessage> getCurrentDate(){
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();  
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(dtf.format(now)));	
 	}
 }
