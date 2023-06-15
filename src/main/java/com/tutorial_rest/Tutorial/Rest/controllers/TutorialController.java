@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tutorial_rest.Tutorial.Rest.messages.ResponseMessage;
 import com.tutorial_rest.Tutorial.Rest.services.TutorialService;
 
+import lombok.extern.log4j.Log4j2;
+
 @RestController
+@Log4j2
 public class TutorialController {
 
   @Autowired private TutorialService tutorialService;
@@ -21,7 +24,7 @@ public class TutorialController {
   @GetMapping("/welcome")
   public ResponseEntity<ResponseMessage> getWelcome() {
     final String mensaje = "Welcome!!!";
-    System.out.println(mensaje);
+    log.info(mensaje);
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(mensaje));
   }
 

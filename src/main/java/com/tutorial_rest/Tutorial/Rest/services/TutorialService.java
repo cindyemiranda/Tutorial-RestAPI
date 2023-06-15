@@ -2,7 +2,10 @@ package com.tutorial_rest.Tutorial.Rest.services;
 
 import org.springframework.stereotype.Service;
 
+import lombok.extern.log4j.Log4j2;
+
 @Service
+@Log4j2
 public class TutorialService {
 
   public String getValueFibonacci(final Integer number) {
@@ -18,9 +21,9 @@ public class TutorialService {
       t2 = f;
       f = t1 + f;
       t1 = t2;
-      System.out.println(t1);
-      response = response.concat(t1.toString()).concat(" ");
+      response = response.concat(" ").concat(t1.toString()).concat(" ");
     }
+    log.info(response);
     return response;
   }
 }
