@@ -10,6 +10,8 @@ import com.tutorial_rest.Tutorial.Rest.utils.Constantes;
 
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;  
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
 
 @RestController
 public class TutorialController {
@@ -38,6 +40,16 @@ public class TutorialController {
         	mensajePropiedad = propertyValue;
         }
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(mensajePropiedad));
-    }	
+    }
+	
+	@GetMapping("/get-countries-time")
+	public ResponseEntity<ResponseMessage> getCountriesCode(){
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		ZoneId bogotaColombiaZoneID = ZoneId.of(Constantes.ZONE_COLOMBIA_BOGOTA);
+		ZoneId elSalvadorZoneID = ZoneId.of(Constantes.ZONE_EL_SALVADOR);
+		LocalDateTime nowBogota = LocalDateTime.now(bogotaColombiaZoneID);
+		LocalDateTime nowElSalvador = LocalDateTime.now(elSalvadorZoneID);
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("*************** La hora en Bogotá es: "+ dtf.format(nowBogota) + " ***************** La hora en el Salvador es: " + dtf.format(nowElSalvador)));	
+	}
 	
 }

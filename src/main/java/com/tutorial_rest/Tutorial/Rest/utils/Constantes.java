@@ -12,6 +12,9 @@ public class Constantes {
 	public static final String PROPIEDAD_SISTEMA_OPERATIVO_2 = "os.name";
 	public static final String PROPIEDAD_SISTEMA_OPERATIVO_3 = "os.arch";
 	
+	public static final String ZONE_EL_SALVADOR	= "America/El_Salvador";
+	public static final String ZONE_COLOMBIA_BOGOTA	= "America/Bogota";
+
 	Constantes() {		
 	}
 	
