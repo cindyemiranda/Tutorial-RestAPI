@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tutorial_rest.Tutorial.Rest.messages.ResponseMessage;
 import com.tutorial_rest.Tutorial.Rest.services.TutorialService;
+import com.tutorial_rest.Tutorial.Rest.utils.Constantes;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -23,8 +24,8 @@ public class TutorialController {
 
   @GetMapping("/welcome")
   public ResponseEntity<ResponseMessage> getWelcome() {
-    final String mensaje = "Welcome!!!";
-    log.info(mensaje);
+    final String mensaje = Constantes.CODIGO_GENERAL_1;
+    System.out.println(mensaje);
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(mensaje));
   }
 
@@ -39,5 +40,17 @@ public class TutorialController {
   public ResponseEntity<ResponseMessage> getFibonacciSerie(@PathVariable final String value) {
     return ResponseEntity.status(HttpStatus.OK)
         .body(new ResponseMessage(tutorialService.getValueFibonacci(Integer.parseInt(value))));
+  }
+
+  @GetMapping("/system-property")
+  public ResponseEntity<ResponseMessage> getSystemProperty() {
+    final String propertyValue = System.getProperty(Constantes.PROPIEDAD_SISTEMA_OPERATIVO_2);
+    String mensajePropiedad = "";
+    if (propertyValue == null || propertyValue.isEmpty()) {
+      mensajePropiedad = "La propiedad " + propertyValue + " no existe";
+    } else {
+      mensajePropiedad = propertyValue;
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(mensajePropiedad));
   }
 }
