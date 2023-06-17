@@ -15,7 +15,6 @@ public class Constantes {
 	public static final String ZONE_EL_SALVADOR	= "America/El_Salvador";
 	public static final String ZONE_COLOMBIA_BOGOTA	= "America/Bogota";
 
-	Constantes() {		
-	}
+	Constantes() {}
 	
 }
