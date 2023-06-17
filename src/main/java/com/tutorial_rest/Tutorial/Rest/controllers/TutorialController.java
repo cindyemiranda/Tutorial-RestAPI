@@ -53,4 +53,12 @@ public class TutorialController {
     }
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(mensajePropiedad));
   }
+
+@GetMapping("/Bye_bye")
+  public ResponseEntity<ResponseMessage> getBye() {
+    final String mensaje = "Bye bye";
+    System.out.println(mensaje);
+    return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(mensaje));
+  }
+
 }
