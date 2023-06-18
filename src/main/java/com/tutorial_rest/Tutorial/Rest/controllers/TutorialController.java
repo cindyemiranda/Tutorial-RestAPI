@@ -1,8 +1,5 @@
 package com.tutorial_rest.Tutorial.Rest.controllers;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +11,9 @@ import com.tutorial_rest.Tutorial.Rest.messages.ResponseMessage;
 import com.tutorial_rest.Tutorial.Rest.services.TutorialService;
 import com.tutorial_rest.Tutorial.Rest.utils.Constantes;
 
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;  
+import java.time.ZoneId;
 import lombok.extern.log4j.Log4j2;
 
 @RestController
@@ -54,8 +54,18 @@ public class TutorialController {
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(mensajePropiedad));
   }
 
-@GetMapping("/Bye_bye")
-  public ResponseEntity<ResponseMessage> getBye() {
+	@GetMapping("/get-countries-time")
+	public ResponseEntity<ResponseMessage> getCountriesCode() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		ZoneId bogotaColombiaZoneID = ZoneId.of(Constantes.ZONE_COLOMBIA_BOGOTA);
+		ZoneId elSalvadorZoneID = ZoneId.of(Constantes.ZONE_EL_SALVADOR);
+		LocalDateTime nowBogota = LocalDateTime.now(bogotaColombiaZoneID);
+		LocalDateTime nowElSalvador = LocalDateTime.now(elSalvadorZoneID);
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("*************** La hora en Bogotá es: "+ dtf.format(nowBogota) + " ***************** La hora en el Salvador es: " + dtf.format(nowElSalvador)));	
+	}
+
+	@GetMapping("/Bye_bye")
+	public ResponseEntity<ResponseMessage> getBye() {
     final String mensaje = "Bye bye";
     System.out.println(mensaje);
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(mensaje));
