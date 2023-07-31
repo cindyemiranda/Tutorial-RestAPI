@@ -44,7 +44,27 @@ stages:
 
     - upload: $(Build.ArtifactStagingDirectory)
       artifact: drop
-
+- stage: Tests
+  displayName: Tests stage
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+    - job: MavenTest
+      displayName: Maven test
+      pool:
+        vmImage: $(vmImageName)
+      steps:
+        - task: Maven@4
+          displayName: 'Running tests'
+          inputs:
+            mavenPomFile: 'pom.xml'
+            publishJUnitResults: true
+            testResultsFiles: '**/surefire-reports/TEST-*.xml'
+            javaHomeOption: 'JDKVersion'
+            mavenVersionOption: 'Default'
+            mavenAuthenticateFeed: false
+            effectivePomSkip: false
+            sonarQubeRunAnalysis: false
 - stage: Deploy
   displayName: Deploy stage
   dependsOn: Build
