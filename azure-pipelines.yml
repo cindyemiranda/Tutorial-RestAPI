@@ -67,7 +67,7 @@ stages:
             sonarQubeRunAnalysis: false
 - stage: Deploy
   displayName: Deploy stage
-  dependsOn: Build
+  dependsOn: Tests
   condition: succeeded()
   jobs:
   - deployment: DeployLinuxWebApp
